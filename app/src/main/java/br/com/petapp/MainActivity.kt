@@ -9,16 +9,16 @@ import br.com.petapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: PetViewModel
+    private lateinit var petViewModel: PetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this).get(PetViewModel::class.java)
-        viewModel.display.observe(this, { binding.textViewDisplay.text = it })
+        petViewModel = ViewModelProviders.of(this).get(PetViewModel::class.java)
+        binding.petViewModel = petViewModel
 
-        binding.buttonText.setOnClickListener { viewModel.displayText() }
+        petViewModel.display.observe(this, { binding.textViewDisplay.text = it })
     }
 
 }
