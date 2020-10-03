@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "br.com.petapp",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "BUNDLE_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 1,
+        "versionName": "1.0",
+        "outputFile": "app-buildFeatures-unsigned.apk",
+        "fullName": "buildFeatures",
+        "baseName": "buildFeatures",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "br.com.petapp",
+        "split": "",
+        "minSdkVersion": "19"
+      }
+    }
+  ]
+}
