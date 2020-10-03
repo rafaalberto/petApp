@@ -1,4 +1,0 @@
-#Fri Oct 02 20:48:12 BRT 2020
-base.0=/home/rafael/dev/studies/android/petApp/app/build/intermediates/dex/buildFeatures/mergeDexBuildFeatures/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
