@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         binding.petViewModel = petViewModel
 
         petViewModel.display.observe(this, { binding.textViewDisplay.text = it })
+
+        val pets = ArrayList<String>()
+        pets.add("Rabbit 1")
+        pets.add("Rabbit 2")
+        pets.add("Rabbit 3")
+
+        binding.petsList.adapter = PetAdapter(pets)
     }
 
 }
