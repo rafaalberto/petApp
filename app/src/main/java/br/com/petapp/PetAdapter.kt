@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PetAdapter(private val pets: ArrayList<String>) : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
+class PetAdapter : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(text: String) {
-            val textViewPet = itemView.findViewById(R.id.textViewPet) as TextView
-            textViewPet.text = text
-        }
+    var pets: List<String> = emptyList()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +26,13 @@ class PetAdapter(private val pets: ArrayList<String>) : RecyclerView.Adapter<Pet
 
     override fun getItemCount(): Int {
         return pets.size
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(text: String) {
+            val textViewPet = itemView.findViewById(R.id.textViewPet) as TextView
+            textViewPet.text = text
+        }
     }
 
 }
