@@ -19,6 +19,7 @@ class PetViewModel : ViewModel() {
         petsList.add("Rabbit 3")
         petsList.add("Rabbit 4")
         petsList.add("Rabbit 5")
+        petsList.add("Rabbit 6")
         _pets.value = petsList
     }
 
