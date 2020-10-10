@@ -2,27 +2,19 @@ package br.com.petapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.petapp.databinding.ListItemPetsBinding
 
-class PetAdapter : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
-
-    var pets: List<String> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class PetAdapter : ListAdapter<String, PetAdapter.ViewHolder>(PetDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(pets[position])
-    }
-
-    override fun getItemCount(): Int {
-        return pets.size
+        holder.bind(getItem(position))
     }
 
     class ViewHolder(private val binding: ListItemPetsBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -40,4 +32,15 @@ class PetAdapter : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
         }
     }
 
+}
+
+class PetDiffCallback : DiffUtil.ItemCallback<String>() {
+
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
 }

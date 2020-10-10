@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = PetAdapter()
         binding.petsList.adapter = adapter
 
-        petViewModel.pets.observe(this, { it?.let { adapter.pets = it } })
+        petViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
     }
 
 }

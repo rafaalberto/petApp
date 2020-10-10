@@ -13,14 +13,17 @@ class PetViewModel : ViewModel() {
     val pets: LiveData<List<String>> get() = _pets
 
     init {
-        val petsList = ArrayList<String>()
-        petsList.add("Rabbit 1")
-        petsList.add("Rabbit 2")
-        petsList.add("Rabbit 3")
-        petsList.add("Rabbit 4")
-        petsList.add("Rabbit 5")
-        petsList.add("Rabbit 6")
-        _pets.value = petsList
+        val petsName = ArrayList<String>()
+        petsName.add("Quick")
+        petsName.add("Tom")
+        petsName.add("Lassie")
+        petsName.add("Jerry")
+        petsName.add("Meggie")
+        petsName.add("Mel")
+        petsName.add("Mimi")
+        petsName.add("Bobby")
+        petsName.add("Jimmy")
+        _pets.value = petsName
     }
 
     fun displayText() {
