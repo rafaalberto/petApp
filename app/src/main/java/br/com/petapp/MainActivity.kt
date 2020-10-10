@@ -2,26 +2,12 @@ package br.com.petapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import br.com.petapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var petViewModel: PetViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        petViewModel = ViewModelProviders.of(this).get(PetViewModel::class.java)
-        binding.petViewModel = petViewModel
-
-        val adapter = PetAdapter()
-        binding.petsList.adapter = adapter
-
-        petViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
+        setContentView(R.layout.activity_main)
     }
 
 }
