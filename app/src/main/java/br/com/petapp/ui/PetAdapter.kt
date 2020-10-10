@@ -1,4 +1,4 @@
-package br.com.petapp
+package br.com.petapp.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.petapp.databinding.ListItemPetsBinding
+import br.com.petapp.model.Pet
 
 class PetAdapter : ListAdapter<Pet, PetAdapter.ViewHolder>(PetDiffCallback()) {
 

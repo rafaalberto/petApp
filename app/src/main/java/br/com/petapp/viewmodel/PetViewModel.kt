@@ -1,8 +1,9 @@
-package br.com.petapp
+package br.com.petapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.petapp.model.Pet
 
 class PetViewModel : ViewModel() {
 

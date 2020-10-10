@@ -5,7 +5,7 @@
     <data>
         <variable
             name="petModel"
-            type="br.com.petapp.Pet" />
+            type="br.com.petapp.model.Pet" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,7 +1,8 @@
-package br.com.petapp
+package br.com.petapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.com.petapp.R
 
 class MainActivity : AppCompatActivity() {
 
