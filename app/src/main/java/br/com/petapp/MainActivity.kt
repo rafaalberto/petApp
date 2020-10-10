@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         petViewModel = ViewModelProviders.of(this).get(PetViewModel::class.java)
         binding.petViewModel = petViewModel
 
-        petViewModel.display.observe(this, { binding.textViewDisplay.text = it })
-
         val adapter = PetAdapter()
         binding.petsList.adapter = adapter
 

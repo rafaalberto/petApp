@@ -6,28 +6,21 @@ import androidx.lifecycle.ViewModel
 
 class PetViewModel : ViewModel() {
 
-    private val _display = MutableLiveData<String>()
-    val display: LiveData<String> get() = _display
-
-    private val _pets = MutableLiveData<List<String>>()
-    val pets: LiveData<List<String>> get() = _pets
+    private val _pets = MutableLiveData<List<Pet>>()
+    val pets: LiveData<List<Pet>> get() = _pets
 
     init {
-        val petsName = ArrayList<String>()
-        petsName.add("Quick")
-        petsName.add("Tom")
-        petsName.add("Lassie")
-        petsName.add("Jerry")
-        petsName.add("Meggie")
-        petsName.add("Mel")
-        petsName.add("Mimi")
-        petsName.add("Bobby")
-        petsName.add("Jimmy")
-        _pets.value = petsName
-    }
-
-    fun displayText() {
-        _display.value = "Hello With View Model"
+        val petsData = ArrayList<Pet>()
+        petsData.add(Pet("Quick", "Rabit"))
+        petsData.add(Pet("Tom", "Cat"))
+        petsData.add(Pet("Lassie", "Dog"))
+        petsData.add(Pet("Jerry", "Mouse"))
+        petsData.add(Pet("Meggie","Cat"))
+        petsData.add(Pet("Mel", "Dog"))
+        petsData.add(Pet("Mimi", "Cat"))
+        petsData.add(Pet("Bobby", "Dog"))
+        petsData.add(Pet("Jimmy", "Dog"))
+        _pets.value = petsData
     }
 
 }
