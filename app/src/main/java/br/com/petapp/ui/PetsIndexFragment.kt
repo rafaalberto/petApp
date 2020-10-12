@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,7 +34,10 @@ class PetsIndexFragment : Fragment() {
             addItemDecoration(itemDecoration)
         }
 
-        val adapter = PetAdapter()
+        val adapter = PetAdapter(PetListener {
+            Toast.makeText(context, "$it selected", Toast.LENGTH_LONG).show()
+        })
+
         binding.petsList.adapter = adapter
 
         petViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })

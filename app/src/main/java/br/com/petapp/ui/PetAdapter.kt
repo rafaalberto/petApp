@@ -8,19 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.petapp.databinding.ListItemPetsBinding
 import br.com.petapp.model.Pet
 
-class PetAdapter : ListAdapter<Pet, PetAdapter.ViewHolder>(PetDiffCallback()) {
+class PetAdapter(private val clickListener: PetListener) : ListAdapter<Pet, PetAdapter.ViewHolder>(PetDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 
     class ViewHolder(private val binding: ListItemPetsBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Pet) {
-            binding.petModel = item
+        fun bind(item: Pet, clickListener: PetListener) {
+            binding.pet = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -44,4 +45,8 @@ class PetDiffCallback : DiffUtil.ItemCallback<Pet>() {
     override fun areContentsTheSame(oldItem: Pet, newItem: Pet): Boolean {
         return oldItem == newItem
     }
+}
+
+class PetListener(val clickListener: (name: String) -> Unit) {
+    fun onClick(pet: Pet) = clickListener(pet.name)
 }
