@@ -35,7 +35,7 @@ class PetsIndexFragment : Fragment() {
         }
 
         val adapter = PetAdapter(PetListener {
-            Toast.makeText(context, "$it selected", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "$it selected", Toast.LENGTH_SHORT).show()
         })
 
         binding.petsList.adapter = adapter
