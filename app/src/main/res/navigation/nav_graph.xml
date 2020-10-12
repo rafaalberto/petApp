@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/petsFragment"
-        android:name="br.com.petapp.ui.PetsFragment"
+        android:name="br.com.petapp.ui.PetsIndexFragment"
         android:label="PetsFragment"
-        tools:layout="@layout/fragment_pets" />
+        tools:layout="@layout/fragment_pets_index" />
 </navigation>
