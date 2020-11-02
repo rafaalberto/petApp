@@ -10,6 +10,9 @@ class PetViewModel : ViewModel() {
     private val _pets = MutableLiveData<List<Pet>>()
     val pets: LiveData<List<Pet>> get() = _pets
 
+    private val _navigateToDetail = MutableLiveData<Boolean>()
+    val navigateToDetail: LiveData<Boolean> get() = _navigateToDetail
+
     init {
         val petsData = ArrayList<Pet>()
         petsData.add(Pet("Quick", "Rabit"))
@@ -24,4 +27,11 @@ class PetViewModel : ViewModel() {
         _pets.value = petsData
     }
 
+    fun displayToDetail() {
+        _navigateToDetail.value = true
+    }
+
+    fun displayToDetailComplete() {
+        _navigateToDetail.value = null
+    }
 }

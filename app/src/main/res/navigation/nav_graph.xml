@@ -9,5 +9,14 @@
         android:id="@+id/petsFragment"
         android:name="br.com.petapp.ui.PetsIndexFragment"
         android:label="PetsFragment"
-        tools:layout="@layout/fragment_pets_index" />
+        tools:layout="@layout/fragment_pets_index" >
+        <action
+            android:id="@+id/action_petsIndex_to_petsDetail"
+            app:destination="@id/petsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petsDetailFragment"
+        android:name="br.com.petapp.ui.PetsDetailFragment"
+        android:label="fragment_pets_detail"
+        tools:layout="@layout/fragment_pets_detail" />
 </navigation>

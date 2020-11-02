@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.petapp.R
 import br.com.petapp.databinding.FragmentPetsIndexBinding
@@ -35,7 +35,14 @@ class PetsIndexFragment : Fragment() {
         }
 
         val adapter = PetAdapter(PetListener {
-            Toast.makeText(context, "$it selected", Toast.LENGTH_SHORT).show()
+            petViewModel.displayToDetail()
+        })
+
+        petViewModel.navigateToDetail.observe(this, {
+            if(null != it) {
+                this.findNavController().navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail())
+                petViewModel.displayToDetailComplete()
+            }
         })
 
         binding.petsList.adapter = adapter
