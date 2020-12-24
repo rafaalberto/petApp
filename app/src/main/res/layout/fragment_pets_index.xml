@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="petViewModel"
-            type="br.com.petapp.viewmodel.PetViewModel" />
+            name="petIndexViewModel"
+            type="br.com.petapp.viewmodel.PetIndexViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

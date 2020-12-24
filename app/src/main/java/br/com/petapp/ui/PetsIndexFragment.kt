@@ -12,20 +12,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.petapp.R
 import br.com.petapp.databinding.FragmentPetsIndexBinding
-import br.com.petapp.viewmodel.PetViewModel
+import br.com.petapp.viewmodel.PetIndexViewModel
 
 class PetsIndexFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding: FragmentPetsIndexBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
         binding.lifecycleOwner = this
 
-        val petViewModel: PetViewModel = ViewModelProviders.of(this).get(PetViewModel::class.java)
-        binding.petViewModel = petViewModel
+        val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this).get(PetIndexViewModel::class.java)
+        binding.petIndexViewModel = petIndexViewModel
 
         binding.petsList.apply {
             setHasFixedSize(true)
@@ -35,19 +35,19 @@ class PetsIndexFragment : Fragment() {
         }
 
         val adapter = PetAdapter(PetListener {
-            petViewModel.displayToDetail()
+            petIndexViewModel.displayToDetail(it)
         })
 
-        petViewModel.navigateToDetail.observe(this, {
-            if(null != it) {
-                this.findNavController().navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail())
-                petViewModel.displayToDetailComplete()
+        petIndexViewModel.navigateToDetail.observe(this, {
+            if(it != null) {
+                this.findNavController().navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail(it))
+                petIndexViewModel.displayToDetailComplete()
             }
         })
 
         binding.petsList.adapter = adapter
 
-        petViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
+        petIndexViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
 
         return binding.root
     }

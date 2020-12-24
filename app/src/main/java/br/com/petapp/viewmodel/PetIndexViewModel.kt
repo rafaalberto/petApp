@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.petapp.model.Pet
 
-class PetViewModel : ViewModel() {
+class PetIndexViewModel : ViewModel() {
 
     private val _pets = MutableLiveData<List<Pet>>()
     val pets: LiveData<List<Pet>> get() = _pets
 
-    private val _navigateToDetail = MutableLiveData<Boolean>()
-    val navigateToDetail: LiveData<Boolean> get() = _navigateToDetail
+    private val _navigateToDetail = MutableLiveData<String>()
+    val navigateToDetail: LiveData<String> get() = _navigateToDetail
 
     init {
         val petsData = ArrayList<Pet>()
@@ -27,8 +27,8 @@ class PetViewModel : ViewModel() {
         _pets.value = petsData
     }
 
-    fun displayToDetail() {
-        _navigateToDetail.value = true
+    fun displayToDetail(petName: String) {
+        _navigateToDetail.value = petName
     }
 
     fun displayToDetailComplete() {
