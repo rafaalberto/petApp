@@ -15,8 +15,8 @@ class PetIndexViewModel : ViewModel() {
 
     init {
         val petsData = ArrayList<Pet>()
+        petsData.add(Pet("Kevin", "Cat"))
         petsData.add(Pet("Quick", "Rabit"))
-        petsData.add(Pet("Tom", "Cat"))
         petsData.add(Pet("Lassie", "Dog"))
         petsData.add(Pet("Jerry", "Mouse"))
         petsData.add(Pet("Meggie","Cat"))
