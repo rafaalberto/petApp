@@ -1,9 +1,8 @@
 package br.com.petapp.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -30,6 +29,23 @@ class PetsDetailFragment : Fragment() {
 
         binding.petDetailViewModel = petDetailViewModel
         binding.lifecycleOwner = this
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_pets_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.save -> save()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun save() {
+        Toast.makeText(context, getText(R.string.pet_saved), Toast.LENGTH_LONG).show()
     }
 }
