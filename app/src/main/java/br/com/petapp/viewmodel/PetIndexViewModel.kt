@@ -15,15 +15,15 @@ class PetIndexViewModel : ViewModel() {
 
     init {
         val petsData = ArrayList<Pet>()
-        petsData.add(Pet("Kevin", "Cat"))
-        petsData.add(Pet("Quick", "Rabit"))
-        petsData.add(Pet("Lassie", "Dog"))
-        petsData.add(Pet("Jerry", "Mouse"))
-        petsData.add(Pet("Meggie","Cat"))
-        petsData.add(Pet("Mel", "Dog"))
-        petsData.add(Pet("Mimi", "Cat"))
-        petsData.add(Pet("Bobby", "Dog"))
-        petsData.add(Pet("Jimmy", "Dog"))
+        petsData.add(Pet(1,"Kevin", "Cat"))
+        petsData.add(Pet(2,"Quick", "Rabit"))
+        petsData.add(Pet(3,"Lassie", "Dog"))
+        petsData.add(Pet(4,"Jerry", "Mouse"))
+        petsData.add(Pet(5,"Meggie","Cat"))
+        petsData.add(Pet(6,"Mel", "Dog"))
+        petsData.add(Pet(7,"Mimi", "Cat"))
+        petsData.add(Pet(8,"Bobby", "Dog"))
+        petsData.add(Pet(9,"Jimmy", "Dog"))
         _pets.value = petsData
     }
 

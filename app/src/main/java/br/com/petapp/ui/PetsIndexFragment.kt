@@ -21,16 +21,23 @@ class PetsIndexFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding: FragmentPetsIndexBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
+        val binding: FragmentPetsIndexBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
         binding.lifecycleOwner = this
 
-        val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this).get(PetIndexViewModel::class.java)
+        val petIndexViewModel: PetIndexViewModel =
+            ViewModelProviders.of(this).get(PetIndexViewModel::class.java)
         binding.petIndexViewModel = petIndexViewModel
 
         binding.petsList.apply {
             setHasFixedSize(true)
             val itemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-            itemDecoration.setDrawable(ContextCompat.getDrawable(this.context, R.drawable.list_item_divider)!!)
+            itemDecoration.setDrawable(
+                ContextCompat.getDrawable(
+                    this.context,
+                    R.drawable.list_item_divider
+                )!!
+            )
             addItemDecoration(itemDecoration)
         }
 
@@ -39,8 +46,9 @@ class PetsIndexFragment : Fragment() {
         })
 
         petIndexViewModel.navigateToDetail.observe(this, {
-            if(it != null) {
-                this.findNavController().navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail(it))
+            if (it != null) {
+                this.findNavController()
+                    .navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail(it))
                 petIndexViewModel.displayToDetailComplete()
             }
         })
@@ -48,6 +56,11 @@ class PetsIndexFragment : Fragment() {
         binding.petsList.adapter = adapter
 
         petIndexViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
+
+        binding.fab.setOnClickListener {
+            this.findNavController()
+                .navigate(PetsIndexFragmentDirections.actionPetsIndexToPetsDetail(""))
+        }
 
         return binding.root
     }
