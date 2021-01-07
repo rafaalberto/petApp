@@ -48,6 +48,7 @@ class PetsDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save -> save()
+            R.id.delete -> delete()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -56,5 +57,9 @@ class PetsDetailFragment : Fragment() {
         val name = binding.editTextName.text.toString()
         val breed = binding.editTextBreed.text.toString()
         petDetailViewModel.save(Pet(0, name, breed))
+    }
+
+    private fun delete() {
+        petDetailViewModel.delete()
     }
 }

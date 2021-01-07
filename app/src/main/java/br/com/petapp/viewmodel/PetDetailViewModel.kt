@@ -9,7 +9,8 @@ import br.com.petapp.database.PetDatabase
 import br.com.petapp.database.entity.Pet
 import kotlinx.coroutines.*
 
-class PetDetailViewModel(application: Application, petId: Long) : AndroidViewModel(application) {
+class PetDetailViewModel(application: Application, private val petId: Long) :
+    AndroidViewModel(application) {
 
     private val _navigateToIndex = MutableLiveData<Boolean>()
     val navigateToIndex: LiveData<Boolean> get() = _navigateToIndex
@@ -27,7 +28,14 @@ class PetDetailViewModel(application: Application, petId: Long) : AndroidViewMod
 
     fun save(pet: Pet) {
         uiScope.launch {
-            insert(pet)
+            if (petId == 0L) insert(pet) else update(pet)
+        }
+        _navigateToIndex.value = true
+    }
+
+    fun delete() {
+        uiScope.launch {
+            delete(petId)
         }
         _navigateToIndex.value = true
     }
@@ -35,6 +43,20 @@ class PetDetailViewModel(application: Application, petId: Long) : AndroidViewMod
     private suspend fun insert(pet: Pet) {
         return withContext(Dispatchers.IO) {
             petDao.insert(pet)
+        }
+    }
+
+    private suspend fun update(pet: Pet) {
+        return withContext(Dispatchers.IO) {
+            pet.id = petId
+            petDao.update(pet)
+        }
+    }
+
+    private suspend fun delete(petId: Long) {
+        return withContext(Dispatchers.IO) {
+            val pet = petDao.getById(petId) ?: return@withContext
+            petDao.delete(pet)
         }
     }
 

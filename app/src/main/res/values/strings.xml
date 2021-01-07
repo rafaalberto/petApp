@@ -5,4 +5,5 @@
     <string name="save">Save</string>
     <string name="pet_saved">Pet saved successfully!</string>
     <string name="add_pet">add pet</string>
+    <string name="delete">Delete</string>
 </resources>
