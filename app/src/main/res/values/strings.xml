@@ -3,6 +3,6 @@
     <string name="name">Name</string>
     <string name="breed">Breed</string>
     <string name="save">Save</string>
-    <string name="pet_saved">Pet salvo com sucesso!</string>
+    <string name="pet_saved">Pet saved successfully!</string>
     <string name="add_pet">add pet</string>
 </resources>

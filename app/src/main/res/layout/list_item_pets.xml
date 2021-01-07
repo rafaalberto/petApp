@@ -5,7 +5,7 @@
     <data>
         <variable
             name="pet"
-            type="br.com.petapp.model.Pet" />
+            type="br.com.petapp.model.PetModel" />
 
         <variable
             name="clickListener"

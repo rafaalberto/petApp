@@ -19,8 +19,8 @@
         android:name="br.com.petapp.ui.PetsDetailFragment"
         android:label="fragment_pets_detail"
         tools:layout="@layout/fragment_pets_detail" >
-        <argument
-            android:name="petName"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_petsDetail_to_petsIndex"
+            app:destination="@id/petsFragment" />
     </fragment>
 </navigation>
