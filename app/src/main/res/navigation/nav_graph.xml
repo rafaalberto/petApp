@@ -22,5 +22,8 @@
         <action
             android:id="@+id/action_petsDetail_to_petsIndex"
             app:destination="@id/petsFragment" />
+        <argument
+            android:name="petId"
+            app:argType="long" />
     </fragment>
 </navigation>

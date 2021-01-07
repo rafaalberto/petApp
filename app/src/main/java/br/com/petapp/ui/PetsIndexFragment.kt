@@ -45,7 +45,7 @@ class PetsIndexFragment : Fragment() {
 
         petIndexViewModel.navigateToDetail.observe(this, {
             if (it != null) {
-                this.findNavController().navigate(actionPetsIndexToPetsDetail())
+                this.findNavController().navigate(actionPetsIndexToPetsDetail(it))
                 petIndexViewModel.displayToDetailComplete()
             }
         })
@@ -55,7 +55,7 @@ class PetsIndexFragment : Fragment() {
         petIndexViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
 
         binding.fab.setOnClickListener {
-            this.findNavController().navigate(actionPetsIndexToPetsDetail())
+            this.findNavController().navigate(actionPetsIndexToPetsDetail(0))
         }
 
         return binding.root

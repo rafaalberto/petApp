@@ -15,4 +15,6 @@ interface PetDao {
     @Query("SELECT * FROM pets ORDER BY name ASC")
     fun findAll(): LiveData<List<Pet>>
 
+    @Query("SELECT * FROM pets WHERE id = :id")
+    fun findById(id: Long): LiveData<Pet>
 }

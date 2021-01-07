@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.petapp.R
 import br.com.petapp.database.entity.Pet
 import br.com.petapp.databinding.FragmentPetsDetailBinding
-import br.com.petapp.ui.PetsDetailFragmentDirections.*
+import br.com.petapp.ui.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
 import br.com.petapp.viewmodel.PetDetailViewModel
 import br.com.petapp.viewmodel.PetDetailViewModelFactory
 
@@ -17,7 +17,8 @@ class PetsDetailFragment : Fragment() {
 
     private val petDetailViewModel: PetDetailViewModel by lazy {
         val application = requireNotNull(this.activity).application
-        ViewModelProviders.of(this, PetDetailViewModelFactory(application))
+        val arguments = PetsDetailFragmentArgs.fromBundle(arguments!!)
+        ViewModelProviders.of(this, PetDetailViewModelFactory(application, arguments.petId))
             .get(PetDetailViewModel::class.java)
     }
 
