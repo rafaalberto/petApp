@@ -1,34 +1,22 @@
 package br.com.petapp.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import br.com.petapp.model.PetModel
+import br.com.petapp.database.PetDatabase
 
-class PetIndexViewModel : ViewModel() {
+class PetIndexViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _pets = MutableLiveData<List<PetModel>>()
-    val pets: LiveData<List<PetModel>> get() = _pets
+    private val _navigateToDetail = MutableLiveData<Long>()
+    val navigateToDetail: LiveData<Long> get() = _navigateToDetail
 
-    private val _navigateToDetail = MutableLiveData<String>()
-    val navigateToDetail: LiveData<String> get() = _navigateToDetail
+    private val petDao = PetDatabase.getInstance(application).petDao
 
-    init {
-        val petsData = ArrayList<PetModel>()
-        petsData.add(PetModel(1,"Kevin", "Cat"))
-        petsData.add(PetModel(2,"Quick", "Rabit"))
-        petsData.add(PetModel(3,"Lassie", "Dog"))
-        petsData.add(PetModel(4,"Jerry", "Mouse"))
-        petsData.add(PetModel(5,"Meggie","Cat"))
-        petsData.add(PetModel(6,"Mel", "Dog"))
-        petsData.add(PetModel(7,"Mimi", "Cat"))
-        petsData.add(PetModel(8,"Bobby", "Dog"))
-        petsData.add(PetModel(9,"Jimmy", "Dog"))
-        _pets.value = petsData
-    }
+    val pets = petDao.findAll()
 
-    fun displayToDetail(petName: String) {
-        _navigateToDetail.value = petName
+    fun displayToDetail(id: Long) {
+        _navigateToDetail.value = id
     }
 
     fun displayToDetailComplete() {

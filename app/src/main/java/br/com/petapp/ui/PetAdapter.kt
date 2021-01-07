@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.petapp.database.entity.Pet
 import br.com.petapp.databinding.ListItemPetsBinding
-import br.com.petapp.model.PetModel
 
-class PetAdapter(private val clickListener: PetListener) : ListAdapter<PetModel, PetAdapter.ViewHolder>(PetDiffCallback()) {
+class PetAdapter(private val clickListener: PetListener) : ListAdapter<Pet, PetAdapter.ViewHolder>(PetDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -19,7 +19,7 @@ class PetAdapter(private val clickListener: PetListener) : ListAdapter<PetModel,
     }
 
     class ViewHolder(private val binding: ListItemPetsBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PetModel, clickListener: PetListener) {
+        fun bind(item: Pet, clickListener: PetListener) {
             binding.pet = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -36,17 +36,17 @@ class PetAdapter(private val clickListener: PetListener) : ListAdapter<PetModel,
 
 }
 
-class PetDiffCallback : DiffUtil.ItemCallback<PetModel>() {
+class PetDiffCallback : DiffUtil.ItemCallback<Pet>() {
 
-    override fun areItemsTheSame(oldItem: PetModel, newItem: PetModel): Boolean {
+    override fun areItemsTheSame(oldItem: Pet, newItem: Pet): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: PetModel, newItem: PetModel): Boolean {
+    override fun areContentsTheSame(oldItem: Pet, newItem: Pet): Boolean {
         return oldItem == newItem
     }
 }
 
-class PetListener(val clickListener: (name: String) -> Unit) {
-    fun onClick(pet: PetModel) = clickListener(pet.name)
+class PetListener(val clickListener: (id: Long) -> Unit) {
+    fun onClick(pet: Pet) = clickListener(pet.id)
 }

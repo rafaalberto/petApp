@@ -12,8 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.petapp.R
 import br.com.petapp.databinding.FragmentPetsIndexBinding
-import br.com.petapp.ui.PetsIndexFragmentDirections.*
+import br.com.petapp.ui.PetsIndexFragmentDirections.actionPetsIndexToPetsDetail
 import br.com.petapp.viewmodel.PetIndexViewModel
+import br.com.petapp.viewmodel.PetIndexViewModelFactory
 
 class PetsIndexFragment : Fragment() {
 
@@ -25,7 +26,10 @@ class PetsIndexFragment : Fragment() {
         val binding: FragmentPetsIndexBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
         binding.lifecycleOwner = this
 
-        val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this).get(PetIndexViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this, PetIndexViewModelFactory(application))
+            .get(PetIndexViewModel::class.java)
+
         binding.petIndexViewModel = petIndexViewModel
 
         binding.petsList.apply {
