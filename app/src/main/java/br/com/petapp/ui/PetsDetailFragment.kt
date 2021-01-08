@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import br.com.petapp.R
-import br.com.petapp.database.entity.Pet
+import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.databinding.FragmentPetsDetailBinding
 import br.com.petapp.ui.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
 import br.com.petapp.viewmodel.PetDetailViewModel
@@ -56,7 +56,7 @@ class PetsDetailFragment : Fragment() {
     private fun save() {
         val name = binding.editTextName.text.toString()
         val breed = binding.editTextBreed.text.toString()
-        petDetailViewModel.save(Pet(0, name, breed))
+        petDetailViewModel.save(PetEntity(0, name, breed))
     }
 
     private fun delete() {

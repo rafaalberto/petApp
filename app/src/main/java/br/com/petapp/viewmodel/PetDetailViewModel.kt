@@ -6,8 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import br.com.petapp.database.PetDatabase
-import br.com.petapp.database.entity.Pet
-import kotlinx.coroutines.*
+import br.com.petapp.database.entity.PetEntity
+import br.com.petapp.database.repository.PetRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class PetDetailViewModel(application: Application, private val petId: Long) :
     AndroidViewModel(application) {
@@ -17,47 +21,32 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val petDao = PetDatabase.getInstance(application).petDao
+    private val petRepository = PetRepository(PetDatabase.getInstance(application).petDao)
 
-    val pet = MediatorLiveData<Pet>()
+    val pet = MediatorLiveData<PetEntity>()
 
     init {
-        pet.addSource(petDao.findById(petId), pet::setValue)
+        pet.addSource(petRepository.findById(petId), pet::setValue)
         _navigateToIndex.value = false
     }
 
-    fun save(pet: Pet) {
+    fun save(pet: PetEntity) {
         uiScope.launch {
-            if (petId == 0L) insert(pet) else update(pet)
+            if (petId == 0L) {
+                petRepository.insert(pet)
+            } else {
+                pet.id = petId
+                petRepository.update(pet)
+            }
         }
         _navigateToIndex.value = true
     }
 
     fun delete() {
         uiScope.launch {
-            delete(petId)
+            petRepository.delete(petId)
         }
         _navigateToIndex.value = true
-    }
-
-    private suspend fun insert(pet: Pet) {
-        return withContext(Dispatchers.IO) {
-            petDao.insert(pet)
-        }
-    }
-
-    private suspend fun update(pet: Pet) {
-        return withContext(Dispatchers.IO) {
-            pet.id = petId
-            petDao.update(pet)
-        }
-    }
-
-    private suspend fun delete(petId: Long) {
-        return withContext(Dispatchers.IO) {
-            val pet = petDao.getById(petId) ?: return@withContext
-            petDao.delete(pet)
-        }
     }
 
     override fun onCleared() {
