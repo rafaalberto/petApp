@@ -12,6 +12,7 @@ import br.com.petapp.databinding.FragmentPetsDetailBinding
 import br.com.petapp.ui.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
 import br.com.petapp.viewmodel.PetDetailViewModel
 import br.com.petapp.viewmodel.PetDetailViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class PetsDetailFragment : Fragment() {
 
@@ -34,7 +35,17 @@ class PetsDetailFragment : Fragment() {
         setHasOptionsMenu(true)
 
         petDetailViewModel.navigateToIndex.observe(this, {
-            if (it) this.findNavController().navigate(actionPetsDetailToPetsIndex())
+            if (it == true) {
+                this.findNavController().navigate(actionPetsDetailToPetsIndex())
+                petDetailViewModel.doneNavigatingToIndex()
+            }
+        })
+
+        petDetailViewModel.showSnackBar.observe(this, {
+            if (it == true) {
+                Snackbar.make(activity!!.findViewById(android.R.id.content), getString(R.string.pet_saved), Snackbar.LENGTH_SHORT).show()
+                petDetailViewModel.doneShowingSnackBar()
+            }
         })
 
         return binding.root

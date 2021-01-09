@@ -46,7 +46,7 @@ class PetsIndexFragment : Fragment() {
         petIndexViewModel.navigateToDetail.observe(this, {
             if (it != null) {
                 this.findNavController().navigate(actionPetsIndexToPetsDetail(it))
-                petIndexViewModel.displayToDetailComplete()
+                petIndexViewModel.doneNavigatingToDetail()
             }
         })
 

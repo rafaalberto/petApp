@@ -16,18 +16,20 @@ import kotlinx.coroutines.launch
 class PetDetailViewModel(application: Application, private val petId: Long) :
     AndroidViewModel(application) {
 
-    private val _navigateToIndex = MutableLiveData<Boolean>()
-    val navigateToIndex: LiveData<Boolean> get() = _navigateToIndex
-
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val petRepository = PetRepository(PetDatabase.getInstance(application).petDao)
 
     val pet = MediatorLiveData<PetEntity>()
 
+    private val _navigateToIndex = MutableLiveData<Boolean>()
+    val navigateToIndex: LiveData<Boolean> get() = _navigateToIndex
+
+    private val _showSnackBar = MutableLiveData<Boolean>()
+    val showSnackBar: LiveData<Boolean> get() = _showSnackBar
+
     init {
         pet.addSource(petRepository.findById(petId), pet::setValue)
-        _navigateToIndex.value = false
     }
 
     fun save(pet: PetEntity) {
@@ -40,6 +42,7 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
             }
         }
         _navigateToIndex.value = true
+        _showSnackBar.value = true
     }
 
     fun delete() {
@@ -47,6 +50,14 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
             petRepository.delete(petId)
         }
         _navigateToIndex.value = true
+    }
+
+    fun doneNavigatingToIndex() {
+        _navigateToIndex.value = false
+    }
+
+    fun doneShowingSnackBar() {
+        _showSnackBar.value = false
     }
 
     override fun onCleared() {
