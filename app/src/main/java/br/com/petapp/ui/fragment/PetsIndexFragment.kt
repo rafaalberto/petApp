@@ -1,4 +1,4 @@
-package br.com.petapp.ui
+package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.petapp.R
 import br.com.petapp.databinding.FragmentPetsIndexBinding
-import br.com.petapp.ui.PetsIndexFragmentDirections.actionPetsIndexToPetsDetail
+import br.com.petapp.ui.adapter.PetAdapter
+import br.com.petapp.ui.adapter.PetListener
+import br.com.petapp.ui.fragment.PetsIndexFragmentDirections.actionPetsIndexToPetsDetail
 import br.com.petapp.viewmodel.PetIndexViewModel
 import br.com.petapp.viewmodel.PetIndexViewModelFactory
 

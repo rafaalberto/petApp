@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="br.com.petapp.ui.PetListener" />
+            type="br.com.petapp.ui.adapter.PetListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

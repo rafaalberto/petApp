@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.petapp.R
 import br.com.petapp.database.PetDatabase
 import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.database.repository.PetRepository
@@ -25,8 +26,8 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
     private val _navigateToIndex = MutableLiveData<Boolean>()
     val navigateToIndex: LiveData<Boolean> get() = _navigateToIndex
 
-    private val _showSnackBar = MutableLiveData<Boolean>()
-    val showSnackBar: LiveData<Boolean> get() = _showSnackBar
+    private val _showSnackBar = MutableLiveData<String?>()
+    val showSnackBar: LiveData<String?> get() = _showSnackBar
 
     init {
         pet.addSource(petRepository.findById(petId), pet::setValue)
@@ -42,7 +43,7 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
             }
         }
         _navigateToIndex.value = true
-        _showSnackBar.value = true
+        _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_saved_successfully)
     }
 
     fun delete() {
@@ -50,6 +51,7 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
             petRepository.delete(petId)
         }
         _navigateToIndex.value = true
+        _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_deleted_successfully)
     }
 
     fun doneNavigatingToIndex() {
@@ -57,7 +59,7 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
     }
 
     fun doneShowingSnackBar() {
-        _showSnackBar.value = false
+        _showSnackBar.value = null
     }
 
     override fun onCleared() {

@@ -1,4 +1,4 @@
-package br.com.petapp.ui
+package br.com.petapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.databinding.ListItemPetsBinding
 
-class PetAdapter(private val clickListener: PetListener) : ListAdapter<PetEntity, PetAdapter.ViewHolder>(PetDiffCallback()) {
+class PetAdapter(private val clickListener: PetListener) : ListAdapter<PetEntity, PetAdapter.ViewHolder>(
+    PetDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)

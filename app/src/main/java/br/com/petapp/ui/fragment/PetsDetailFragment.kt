@@ -1,4 +1,4 @@
-package br.com.petapp.ui
+package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -9,10 +9,12 @@ import androidx.navigation.fragment.findNavController
 import br.com.petapp.R
 import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.databinding.FragmentPetsDetailBinding
-import br.com.petapp.ui.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
+import br.com.petapp.ui.fragment.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
+import br.com.petapp.utils.KeyboardHider
 import br.com.petapp.viewmodel.PetDetailViewModel
 import br.com.petapp.viewmodel.PetDetailViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+
 
 class PetsDetailFragment : Fragment() {
 
@@ -42,8 +44,12 @@ class PetsDetailFragment : Fragment() {
         })
 
         petDetailViewModel.showSnackBar.observe(this, {
-            if (it == true) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), getString(R.string.pet_saved), Snackbar.LENGTH_SHORT).show()
+            if (it != null) {
+                Snackbar.make(
+                    activity!!.findViewById(android.R.id.content),
+                    it,
+                    Snackbar.LENGTH_LONG
+                ).show()
                 petDetailViewModel.doneShowingSnackBar()
             }
         })
@@ -61,6 +67,7 @@ class PetsDetailFragment : Fragment() {
             R.id.save -> save()
             R.id.delete -> delete()
         }
+        KeyboardHider.hideKeyboard(view!!, context!!)
         return super.onOptionsItemSelected(item)
     }
 

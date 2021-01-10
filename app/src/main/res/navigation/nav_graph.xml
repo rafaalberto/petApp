@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/petsFragment"
-        android:name="br.com.petapp.ui.PetsIndexFragment"
+        android:name="br.com.petapp.ui.fragment.PetsIndexFragment"
         android:label="PetsFragment"
         tools:layout="@layout/fragment_pets_index" >
         <action
@@ -16,12 +16,14 @@
     </fragment>
     <fragment
         android:id="@+id/petsDetailFragment"
-        android:name="br.com.petapp.ui.PetsDetailFragment"
+        android:name="br.com.petapp.ui.fragment.PetsDetailFragment"
         android:label="fragment_pets_detail"
         tools:layout="@layout/fragment_pets_detail" >
         <action
             android:id="@+id/action_petsDetail_to_petsIndex"
-            app:destination="@id/petsFragment" />
+            app:destination="@id/petsFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="true" />
         <argument
             android:name="petId"
             app:argType="long" />
