@@ -57,6 +57,10 @@ class PetsDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.delete).isVisible = PetsDetailFragmentArgs.fromBundle(arguments!!).petId != 0L
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_pets_detail, menu)

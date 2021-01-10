@@ -34,16 +34,30 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
     }
 
     fun save(pet: PetEntity) {
-        uiScope.launch {
-            if (petId == 0L) {
-                petRepository.insert(pet)
-            } else {
-                pet.id = petId
-                petRepository.update(pet)
+        if(isValid(pet)) {
+            uiScope.launch {
+                if (petId == 0L) {
+                    petRepository.insert(pet)
+                } else {
+                    pet.id = petId
+                    petRepository.update(pet)
+                }
             }
+            _navigateToIndex.value = true
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_saved_successfully)
         }
-        _navigateToIndex.value = true
-        _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_saved_successfully)
+    }
+
+    private fun isValid(pet: PetEntity) : Boolean {
+        if(pet.name == "") {
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.name_must_be_typed)
+            return false
+        }
+        if(pet.breed == "") {
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.breed_must_be_typed)
+            return false
+        }
+        return true
     }
 
     fun delete() {
