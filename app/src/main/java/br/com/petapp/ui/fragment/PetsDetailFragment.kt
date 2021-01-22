@@ -2,6 +2,7 @@ package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -34,6 +35,13 @@ class PetsDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
         binding.petDetailViewModel = petDetailViewModel
         binding.lifecycleOwner = this
+
+        ArrayAdapter.createFromResource(context!!, R.array.genders, R.layout.spinner_gender)
+            .also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+                binding.spinnerGender.adapter = adapter
+            }
+
         setHasOptionsMenu(true)
 
         petDetailViewModel.navigateToIndex.observe(this, {
@@ -58,7 +66,8 @@ class PetsDetailFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.delete).isVisible = PetsDetailFragmentArgs.fromBundle(arguments!!).petId != 0L
+        menu.findItem(R.id.delete).isVisible =
+            PetsDetailFragmentArgs.fromBundle(arguments!!).petId != 0L
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
