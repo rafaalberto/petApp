@@ -16,7 +16,6 @@ import br.com.petapp.viewmodel.PetDetailViewModel
 import br.com.petapp.viewmodel.PetDetailViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-
 class PetsDetailFragment : Fragment() {
 
     private val petDetailViewModel: PetDetailViewModel by lazy {
@@ -35,12 +34,9 @@ class PetsDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
         binding.petDetailViewModel = petDetailViewModel
         binding.lifecycleOwner = this
-
-        ArrayAdapter.createFromResource(context!!, R.array.genders, R.layout.spinner_gender)
-            .also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-                binding.spinnerGender.adapter = adapter
-            }
+        binding.spinnerGender.adapter =
+            ArrayAdapter(this.context!!, R.layout.spinner_gender, petDetailViewModel.genders)
+                .also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line) }
 
         setHasOptionsMenu(true)
 
@@ -53,11 +49,7 @@ class PetsDetailFragment : Fragment() {
 
         petDetailViewModel.showSnackBar.observe(this, {
             if (it != null) {
-                Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    it,
-                    Snackbar.LENGTH_LONG
-                ).show()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
                 petDetailViewModel.doneShowingSnackBar()
             }
         })

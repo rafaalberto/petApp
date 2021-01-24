@@ -9,6 +9,7 @@ import br.com.petapp.R
 import br.com.petapp.database.PetDatabase
 import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.database.repository.PetRepository
+import br.com.petapp.model.GenderEnum
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,6 +23,8 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
     private val petRepository = PetRepository(PetDatabase.getInstance(application).petDao)
 
     val pet = MediatorLiveData<PetEntity>()
+
+    val genders = GenderEnum.values().map { it.description }
 
     private val _navigateToIndex = MutableLiveData<Boolean>()
     val navigateToIndex: LiveData<Boolean> get() = _navigateToIndex
