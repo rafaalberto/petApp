@@ -2,7 +2,6 @@ package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -10,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.petapp.R
 import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.databinding.FragmentPetsDetailBinding
+import br.com.petapp.model.GenderConverters
 import br.com.petapp.ui.fragment.PetsDetailFragmentDirections.actionPetsDetailToPetsIndex
 import br.com.petapp.utils.KeyboardHider
 import br.com.petapp.viewmodel.PetDetailViewModel
@@ -34,9 +34,6 @@ class PetsDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
         binding.petDetailViewModel = petDetailViewModel
         binding.lifecycleOwner = this
-        binding.spinnerGender.adapter =
-            ArrayAdapter(this.context!!, R.layout.spinner_gender, petDetailViewModel.genders)
-                .also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line) }
 
         setHasOptionsMenu(true)
 
@@ -79,7 +76,8 @@ class PetsDetailFragment : Fragment() {
     private fun save() {
         val name = binding.editTextName.text.toString()
         val breed = binding.editTextBreed.text.toString()
-        petDetailViewModel.save(PetEntity(0, name, breed))
+        val gender = binding.spinnerGender.selectedItemPosition
+        petDetailViewModel.save(PetEntity(0, name, breed, GenderConverters().toGender(gender)))
     }
 
     private fun delete() {

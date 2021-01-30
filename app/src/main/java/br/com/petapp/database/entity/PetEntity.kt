@@ -1,7 +1,9 @@
 package br.com.petapp.database.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import br.com.petapp.model.GenderEnum
 
 @Entity(tableName = "pets")
 data class PetEntity (
@@ -11,5 +13,8 @@ data class PetEntity (
 
     val name: String,
 
-    val breed: String
+    val breed: String,
+
+    @ColumnInfo(name = "gender_id")
+    val gender: GenderEnum
 )

@@ -1,7 +1,7 @@
 package br.com.petapp.model
 
-enum class GenderEnum(val id: Long, val description: String) {
-    UNKNOWN(1, "Unknown"),
-    MALE(2, "Male"),
-    FEMALE(3, "Female")
+enum class GenderEnum (val description: String) {
+    UNKNOWN ("Unknown"),
+    MALE ("Male"),
+    FEMALE ("Female")
 }

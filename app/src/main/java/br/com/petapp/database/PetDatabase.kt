@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import br.com.petapp.database.dao.PetDao
 import br.com.petapp.database.entity.PetEntity
+import br.com.petapp.model.GenderConverters
 
 @Database(entities = [PetEntity::class], version = 1, exportSchema = false)
+@TypeConverters(GenderConverters::class)
 abstract class PetDatabase : RoomDatabase() {
 
     abstract val petDao: PetDao
