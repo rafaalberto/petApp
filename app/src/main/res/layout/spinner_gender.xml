@@ -3,6 +3,6 @@
     android:id="@+id/textViewGender"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="left"
+    android:layout_gravity="start"
     android:textColor="#000000"
     android:textSize="18sp" />
