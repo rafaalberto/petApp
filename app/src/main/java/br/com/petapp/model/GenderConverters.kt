@@ -8,6 +8,6 @@ class GenderConverters {
     fun toGender(value: Int) = enumValues<GenderEnum>()[value]
 
     @TypeConverter
-    fun fromGender(value: GenderEnum) = value.ordinal
+    fun fromGender(value: GenderEnum) = value.id
 
 }

@@ -15,8 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class PetDetailViewModel(application: Application, private val petId: Long) :
-    AndroidViewModel(application) {
+class PetDetailViewModel(application: Application, private val petId: Long) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -58,6 +57,10 @@ class PetDetailViewModel(application: Application, private val petId: Long) :
         }
         if(pet.breed == "") {
             _showSnackBar.value = getApplication<Application>().resources.getString(R.string.breed_must_be_typed)
+            return false
+        }
+        if(pet.gender == GenderEnum.GENDER) {
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.gender_must_be_selected)
             return false
         }
         return true

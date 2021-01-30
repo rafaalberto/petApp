@@ -2,7 +2,6 @@ package br.com.petapp.database.repository
 
 import br.com.petapp.database.dao.PetDao
 import br.com.petapp.database.entity.PetEntity
-import br.com.petapp.model.GenderEnum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
