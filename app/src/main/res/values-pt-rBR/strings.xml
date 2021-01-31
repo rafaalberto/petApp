@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name" translatable="false">Pets</string>
+
+    <string name="name_label">Nome</string>
+    <string name="breed_label">Espécie</string>
+
+    <string name="gender_label">Gênero</string>
+    <string name="unknown_option">Desconhecido</string>
+    <string name="male_option">Masculino</string>
+    <string name="female_option">Feminino</string>
+
+    <string name="save_label">Salvar</string>
+    <string name="add_pet_label">Adicionar pet</string>
+    <string name="delete_label">Deletar</string>
+
+    <string name="add_new_pet_title">Adicionar pet</string>
+    <string name="edit_pet_title">Alterar pet</string>
+
+    <string name="delete_this_pet_msg">Deletar este pet?</string>
+    <string name="delete_action_option">Deletar</string>
+    <string name="cancel_action_option">Cancelar</string>
+
+    <string name="pet_saved_successfully_msg">Pet salvo com sucesso!</string>
+    <string name="pet_deleted_successfully_msg">Pet deletado com sucesso!</string>
+
+    <string name="name_must_be_typed_msg">Nome deve ser informado</string>
+    <string name="breed_must_be_typed_msg">Espécie deve ser informada</string>
+    <string name="gender_must_be_selected_msg">Gênero deve ser selecionado</string>
+</resources>

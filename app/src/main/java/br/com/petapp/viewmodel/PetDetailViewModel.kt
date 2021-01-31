@@ -46,21 +46,21 @@ class PetDetailViewModel(application: Application, private val petId: Long) : An
                 }
             }
             _navigateToIndex.value = true
-            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_saved_successfully)
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_saved_successfully_msg)
         }
     }
 
     private fun isValid(pet: PetEntity) : Boolean {
         if(pet.name == "") {
-            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.name_must_be_typed)
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.name_must_be_typed_msg)
             return false
         }
         if(pet.breed == "") {
-            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.breed_must_be_typed)
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.breed_must_be_typed_msg)
             return false
         }
         if(pet.gender == GenderEnum.GENDER) {
-            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.gender_must_be_selected)
+            _showSnackBar.value = getApplication<Application>().resources.getString(R.string.gender_must_be_selected_msg)
             return false
         }
         return true
@@ -71,7 +71,7 @@ class PetDetailViewModel(application: Application, private val petId: Long) : An
             petRepository.delete(petId)
         }
         _navigateToIndex.value = true
-        _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_deleted_successfully)
+        _showSnackBar.value = getApplication<Application>().resources.getString(R.string.pet_deleted_successfully_msg)
     }
 
     fun doneNavigatingToIndex() {

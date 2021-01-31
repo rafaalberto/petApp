@@ -66,7 +66,7 @@ class PetsDetailFragment : Fragment() {
 
     private fun setTitle() {
         (activity as AppCompatActivity).supportActionBar?.title =
-            if (getPetIdArgument() == 0L) getString(R.string.add_new_pet) else getString(R.string.edit_pet)
+            if (getPetIdArgument() == 0L) getString(R.string.add_new_pet_title) else getString(R.string.edit_pet_title)
     }
 
     private fun setNavigationObservable() {
@@ -100,9 +100,9 @@ class PetsDetailFragment : Fragment() {
 
     private fun delete() {
         AlertDialog.Builder(context!!).run {
-            setMessage(getString(R.string.delete_this_pet))
-            setPositiveButton(getString(R.string.delete_action)) { _, _ -> petDetailViewModel.delete() }
-            setNegativeButton(getString(R.string.cancel_action)) { dialog, _ -> dialog.dismiss() }
+            setMessage(getString(R.string.delete_this_pet_msg))
+            setPositiveButton(getString(R.string.delete_action_option)) { _, _ -> petDetailViewModel.delete() }
+            setNegativeButton(getString(R.string.cancel_action_option)) { dialog, _ -> dialog.dismiss() }
             create()
             show()
         }

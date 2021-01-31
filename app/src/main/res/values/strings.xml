@@ -1,18 +1,29 @@
 <resources>
-    <string name="app_name">Pets</string>
-    <string name="name">Name</string>
-    <string name="breed">Breed</string>
-    <string name="save">Save</string>
-    <string name="pet_saved_successfully">Pet saved successfully!</string>
-    <string name="pet_deleted_successfully">Pet deleted successfully!</string>
-    <string name="add_pet">add pet</string>
-    <string name="delete">Delete</string>
-    <string name="name_must_be_typed">Name must be typed</string>
-    <string name="breed_must_be_typed">Breed must be typed</string>
-    <string name="gender_must_be_selected">Gender must be selected</string>
-    <string name="add_new_pet">Add a new pet</string>
-    <string name="edit_pet">Edit a pet</string>
-    <string name="delete_this_pet">Delete this pet?</string>
-    <string name="delete_action">Delete</string>
-    <string name="cancel_action">Cancel</string>
+    <string name="app_name" translatable="false">Pets</string>
+
+    <string name="name_label">Name</string>
+    <string name="breed_label">Breed</string>
+
+    <string name="gender_label">Gender</string>
+    <string name="unknown_option">Unknown</string>
+    <string name="male_option">Male</string>
+    <string name="female_option">Female</string>
+
+    <string name="save_label">Save</string>
+    <string name="add_pet_label">Add pet</string>
+    <string name="delete_label">Delete</string>
+
+    <string name="add_new_pet_title">Add a new pet</string>
+    <string name="edit_pet_title">Edit a pet</string>
+
+    <string name="delete_this_pet_msg">Delete this pet?</string>
+    <string name="delete_action_option">Delete</string>
+    <string name="cancel_action_option">Cancel</string>
+
+    <string name="pet_saved_successfully_msg">Pet saved successfully!</string>
+    <string name="pet_deleted_successfully_msg">Pet deleted successfully!</string>
+
+    <string name="name_must_be_typed_msg">Name must be typed</string>
+    <string name="breed_must_be_typed_msg">Breed must be typed</string>
+    <string name="gender_must_be_selected_msg">Gender must be selected</string>
 </resources>
