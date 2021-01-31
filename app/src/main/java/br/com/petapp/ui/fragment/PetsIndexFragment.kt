@@ -21,48 +21,68 @@ import br.com.petapp.viewmodel.PetIndexViewModelFactory
 
 class PetsIndexFragment : Fragment() {
 
+    private val petIndexViewModel: PetIndexViewModel by lazy {
+        val application = requireNotNull(this.activity).application
+        ViewModelProviders.of(this, PetIndexViewModelFactory(application))
+            .get(PetIndexViewModel::class.java)
+    }
+
+    private lateinit var binding: FragmentPetsIndexBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setBinding(inflater, container)
+        setTitle()
+        setFabButton(binding)
+        setListDecoration()
+        setListAdapter()
+        setNavigationObservable(petIndexViewModel)
+        return binding.root
+    }
 
-        val binding: FragmentPetsIndexBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
+    private fun setBinding(inflater: LayoutInflater, container: ViewGroup?) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_index, container, false)
         binding.lifecycleOwner = this
-
-        val application = requireNotNull(this.activity).application
-        val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this, PetIndexViewModelFactory(application))
-            .get(PetIndexViewModel::class.java)
-
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
-
         binding.petIndexViewModel = petIndexViewModel
+    }
 
+    private fun setTitle() {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+    }
+
+    private fun setFabButton(binding: FragmentPetsIndexBinding) {
+        binding.fab.setOnClickListener {
+            this.findNavController().navigate(actionPetsIndexToPetsDetail(0))
+        }
+    }
+
+    private fun setListDecoration() {
         binding.petsList.apply {
             setHasFixedSize(true)
             val itemDecoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-            itemDecoration.setDrawable(ContextCompat.getDrawable(this.context, R.drawable.list_item_divider)!!)
+            itemDecoration.setDrawable(ContextCompat.getDrawable(this.context,
+                R.drawable.list_item_divider)!!)
             addItemDecoration(itemDecoration)
         }
+    }
 
+    private fun setListAdapter() {
         val adapter = PetAdapter(PetListener {
             petIndexViewModel.displayToDetail(it)
         })
 
+        binding.petsList.adapter = adapter
+        petIndexViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
+    }
+
+    private fun setNavigationObservable(petIndexViewModel: PetIndexViewModel) {
         petIndexViewModel.navigateToDetail.observe(this, {
             if (it != null) {
                 this.findNavController().navigate(actionPetsIndexToPetsDetail(it))
                 petIndexViewModel.doneNavigatingToDetail()
             }
         })
-
-        binding.petsList.adapter = adapter
-
-        petIndexViewModel.pets.observe(this, { it?.let { adapter.submitList(it) } })
-
-        binding.fab.setOnClickListener {
-            this.findNavController().navigate(actionPetsIndexToPetsDetail(0))
-        }
-
-        return binding.root
     }
 }

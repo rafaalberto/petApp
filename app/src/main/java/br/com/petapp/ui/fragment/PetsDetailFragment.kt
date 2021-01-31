@@ -2,6 +2,7 @@ package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -31,36 +32,16 @@ class PetsDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
-        binding.petDetailViewModel = petDetailViewModel
-        binding.lifecycleOwner = this
-
+        setBinding(inflater, container)
         setTitle()
-
         setHasOptionsMenu(true)
-
-        petDetailViewModel.navigateToIndex.observe(this, {
-            if (it == true) {
-                this.findNavController().navigate(actionPetsDetailToPetsIndex())
-                petDetailViewModel.doneNavigatingToIndex()
-            }
-        })
-
-        petDetailViewModel.showSnackBar.observe(this, {
-            if (it != null) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content),
-                    it,
-                    Snackbar.LENGTH_LONG).show()
-                petDetailViewModel.doneShowingSnackBar()
-            }
-        })
-
+        setNavigationObservable()
+        setSnackBarObservable()
         return binding.root
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.delete).isVisible =
-            getPetIdArgument() != 0L
+        menu.findItem(R.id.delete).isVisible = getPetIdArgument() != 0L
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -77,12 +58,38 @@ class PetsDetailFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getPetIdArgument() = PetsDetailFragmentArgs.fromBundle(arguments!!).petId
+    private fun setBinding(inflater: LayoutInflater, container: ViewGroup?) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
+        binding.petDetailViewModel = petDetailViewModel
+        binding.lifecycleOwner = this
+    }
 
     private fun setTitle() {
         (activity as AppCompatActivity).supportActionBar?.title =
             if (getPetIdArgument() == 0L) getString(R.string.add_new_pet) else getString(R.string.edit_pet)
     }
+
+    private fun setNavigationObservable() {
+        petDetailViewModel.navigateToIndex.observe(this, {
+            if (it == true) {
+                this.findNavController().navigate(actionPetsDetailToPetsIndex())
+                petDetailViewModel.doneNavigatingToIndex()
+            }
+        })
+    }
+
+    private fun setSnackBarObservable() {
+        petDetailViewModel.showSnackBar.observe(this, {
+            if (it != null) {
+                Snackbar.make(activity!!.findViewById(android.R.id.content),
+                    it,
+                    Snackbar.LENGTH_LONG).show()
+                petDetailViewModel.doneShowingSnackBar()
+            }
+        })
+    }
+
+    private fun getPetIdArgument() = PetsDetailFragmentArgs.fromBundle(arguments!!).petId
 
     private fun save() {
         val name = binding.editTextName.text.toString()
@@ -92,6 +99,12 @@ class PetsDetailFragment : Fragment() {
     }
 
     private fun delete() {
-        petDetailViewModel.delete()
+        AlertDialog.Builder(context!!).run {
+            setMessage(getString(R.string.delete_this_pet))
+            setPositiveButton(getString(R.string.delete_action)) { _, _ -> petDetailViewModel.delete() }
+            setNegativeButton(getString(R.string.cancel_action)) { dialog, _ -> dialog.dismiss() }
+            create()
+            show()
+        }
     }
 }

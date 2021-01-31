@@ -12,4 +12,7 @@
     <string name="gender_must_be_selected">Gender must be selected</string>
     <string name="add_new_pet">Add a new pet</string>
     <string name="edit_pet">Edit a pet</string>
+    <string name="delete_this_pet">Delete this pet?</string>
+    <string name="delete_action">Delete</string>
+    <string name="cancel_action">Cancel</string>
 </resources>
