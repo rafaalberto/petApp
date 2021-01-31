@@ -10,4 +10,6 @@
     <string name="name_must_be_typed">Name must be typed</string>
     <string name="breed_must_be_typed">Breed must be typed</string>
     <string name="gender_must_be_selected">Gender must be selected</string>
+    <string name="add_new_pet">Add a new pet</string>
+    <string name="edit_pet">Edit a pet</string>
 </resources>

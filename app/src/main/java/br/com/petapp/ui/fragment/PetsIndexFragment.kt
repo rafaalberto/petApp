@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -31,6 +32,8 @@ class PetsIndexFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val petIndexViewModel: PetIndexViewModel = ViewModelProviders.of(this, PetIndexViewModelFactory(application))
             .get(PetIndexViewModel::class.java)
+
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
 
         binding.petIndexViewModel = petIndexViewModel
 

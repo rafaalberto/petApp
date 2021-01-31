@@ -2,6 +2,7 @@ package br.com.petapp.ui.fragment
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -20,8 +21,7 @@ class PetsDetailFragment : Fragment() {
 
     private val petDetailViewModel: PetDetailViewModel by lazy {
         val application = requireNotNull(this.activity).application
-        val arguments = PetsDetailFragmentArgs.fromBundle(arguments!!)
-        ViewModelProviders.of(this, PetDetailViewModelFactory(application, arguments.petId))
+        ViewModelProviders.of(this, PetDetailViewModelFactory(application, getPetIdArgument()))
             .get(PetDetailViewModel::class.java)
     }
 
@@ -29,11 +29,13 @@ class PetsDetailFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pets_detail, container, false)
         binding.petDetailViewModel = petDetailViewModel
         binding.lifecycleOwner = this
+
+        setTitle()
 
         setHasOptionsMenu(true)
 
@@ -46,7 +48,9 @@ class PetsDetailFragment : Fragment() {
 
         petDetailViewModel.showSnackBar.observe(this, {
             if (it != null) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(activity!!.findViewById(android.R.id.content),
+                    it,
+                    Snackbar.LENGTH_LONG).show()
                 petDetailViewModel.doneShowingSnackBar()
             }
         })
@@ -56,7 +60,7 @@ class PetsDetailFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.findItem(R.id.delete).isVisible =
-            PetsDetailFragmentArgs.fromBundle(arguments!!).petId != 0L
+            getPetIdArgument() != 0L
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -71,6 +75,13 @@ class PetsDetailFragment : Fragment() {
         }
         KeyboardHider.hideKeyboard(view!!, context!!)
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getPetIdArgument() = PetsDetailFragmentArgs.fromBundle(arguments!!).petId
+
+    private fun setTitle() {
+        (activity as AppCompatActivity).supportActionBar?.title =
+            if (getPetIdArgument() == 0L) getString(R.string.add_new_pet) else getString(R.string.edit_pet)
     }
 
     private fun save() {
