@@ -1,8 +1,10 @@
 package br.com.petapp.utils
 
+import android.view.View
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import br.com.petapp.R
+import br.com.petapp.database.entity.PetEntity
 import br.com.petapp.model.GenderEnum
 import br.com.petapp.ui.adapter.GenderAdapter
 
@@ -13,6 +15,11 @@ fun Spinner.genders(genders: List<Any?>, selectedGender: GenderEnum?) {
         arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
     }
     if (selectedGender != null) this.setCurrentSelection(selectedGender)
+}
+
+@BindingAdapter("goneIfNotNull")
+fun View.goneIfNotNull(pets: List<PetEntity>?) {
+    visibility = if(pets != null && pets.isNotEmpty()) View.GONE else View.VISIBLE
 }
 
 private fun Spinner.setCurrentSelection(selectedGender: GenderEnum) {

@@ -13,6 +13,10 @@
     <string name="add_pet_label">Adicionar pet</string>
     <string name="delete_label">Deletar</string>
 
+    <string name="image_empty_shelter" translatable="false">image</string>
+    <string name="empty_title_text">Está um pouco solitário aqui...</string>
+    <string name="empty_subtitle_text">Comece adicionando um pet</string>
+
     <string name="add_new_pet_title">Adicionar pet</string>
     <string name="edit_pet_title">Alterar pet</string>
 

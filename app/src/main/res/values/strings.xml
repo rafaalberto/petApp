@@ -13,6 +13,10 @@
     <string name="add_pet_label">Add pet</string>
     <string name="delete_label">Delete</string>
 
+    <string name="image_empty_shelter" translatable="false">image</string>
+    <string name="empty_title_text">It\'s been lonely here...</string>
+    <string name="empty_subtitle_text">Get started by adding a pet</string>
+
     <string name="add_new_pet_title">Add a new pet</string>
     <string name="edit_pet_title">Edit a pet</string>
 
@@ -26,4 +30,5 @@
     <string name="name_must_be_typed_msg">Name must be typed</string>
     <string name="breed_must_be_typed_msg">Breed must be typed</string>
     <string name="gender_must_be_selected_msg">Gender must be selected</string>
+
 </resources>
